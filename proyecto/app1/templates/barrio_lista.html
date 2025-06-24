@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Barrios</title>
+</head>
+<body>
+    <h1>Listado de Barrios</h1>
+    <a href="{% url 'crear_barrio' %}">
+        <button>Agregar Barrio</button>
+    </a>
+    <hr>
+    {% for barrio in barrios %}
+        <div>
+            <strong>{{ barrio.nombre }}</strong> - Parroquia: {{ barrio.parroquia.nombre }}<br>
+            Viviendas: {{ barrio.numero_viviendas }}, Parques: {{ barrio.numero_parques }}, Edificios: {{ barrio.numero_edificios_residenciales }}
+        </div>
+        <hr>
+    {% empty %}
+        <p>No hay barrios registrados aún.</p>
+    {% endfor %}
+</body>
+</html>

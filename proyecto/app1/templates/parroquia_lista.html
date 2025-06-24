@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Parroquias</title>
+</head>
+<body>
+    <h1>Listado de Parroquias</h1>
+    <a href="{% url 'crear_parroquia' %}">
+        <button>Agregar Parroquia</button>
+    </a>
+    <hr>
+    {% for parroquia in parroquias %}
+        <div>
+            <strong>{{ parroquia.nombre }}</strong> ({{ parroquia.tipo|title }}) - Ubicación: {{ parroquia.ubicacion|title }}
+            <ul>
+                {% for barrio in parroquia.barrios.all %}
+                    <li>{{ barrio.nombre }} ({{ barrio.numero_viviendas }} viviendas)</li>
+                {% empty %}
+                    <li>No hay barrios en esta parroquia.</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <hr>
+    {% empty %}
+        <p>No hay parroquias registradas aún.</p>
+    {% endfor %}
+</body>
+</html>
