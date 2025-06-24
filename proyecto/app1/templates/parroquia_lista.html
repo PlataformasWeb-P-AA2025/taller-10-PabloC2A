@@ -1,28 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Parroquias</title>
+    <title>Listado de Parroquias</title>
 </head>
 <body>
     <h1>Listado de Parroquias</h1>
-    <a href="{% url 'crear_parroquia' %}">
-        <button>Agregar Parroquia</button>
-    </a>
-    <hr>
-    {% for parroquia in parroquias %}
-        <div>
-            <strong>{{ parroquia.nombre }}</strong> ({{ parroquia.tipo|title }}) - Ubicación: {{ parroquia.ubicacion|title }}
-            <ul>
-                {% for barrio in parroquia.barrios.all %}
-                    <li>{{ barrio.nombre }} ({{ barrio.numero_viviendas }} viviendas)</li>
-                {% empty %}
-                    <li>No hay barrios en esta parroquia.</li>
-                {% endfor %}
-            </ul>
-        </div>
-        <hr>
-    {% empty %}
-        <p>No hay parroquias registradas aún.</p>
-    {% endfor %}
+    <a href="{% url 'crear_parroquia' %}">Agregar Parroquia</a>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Ubicación</th>
+                <th>Tipo</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for parroquia in parroquias %}
+                <tr>
+                    <td>{{ parroquia.nombre }}</td>
+                    <td>{{ parroquia.ubicacion }}</td>
+                    <td>{{ parroquia.tipo }}</td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="3">No hay parroquias registradas.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </body>
 </html>

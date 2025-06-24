@@ -1,22 +1,36 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Barrios</title>
+    <title>Listado de Barrios</title>
 </head>
 <body>
     <h1>Listado de Barrios</h1>
-    <a href="{% url 'crear_barrio' %}">
-        <button>Agregar Barrio</button>
-    </a>
-    <hr>
-    {% for barrio in barrios %}
-        <div>
-            <strong>{{ barrio.nombre }}</strong> - Parroquia: {{ barrio.parroquia.nombre }}<br>
-            Viviendas: {{ barrio.numero_viviendas }}, Parques: {{ barrio.numero_parques }}, Edificios: {{ barrio.numero_edificios_residenciales }}
-        </div>
-        <hr>
-    {% empty %}
-        <p>No hay barrios registrados aún.</p>
-    {% endfor %}
+    <a href="{% url 'crear_barrio' %}">Agregar Barrio</a>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Parroquia</th>
+                <th>Nro. Viviendas</th>
+                <th>Nro. Parques</th>
+                <th>Nro. Edificios Residenciales</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for barrio in barrios %}
+                <tr>
+                    <td>{{ barrio.nombre }}</td>
+                    <td>{{ barrio.parroquia.nombre }}</td>
+                    <td>{{ barrio.numero_viviendas }}</td>
+                    <td>{{ barrio.numero_parques }}</td>
+                    <td>{{ barrio.numero_edificios_residenciales }}</td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="5">No hay barrios registrados.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </body>
 </html>
